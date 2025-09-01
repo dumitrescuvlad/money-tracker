@@ -43,10 +43,10 @@ const Welcome = () => {
           style={{ alignItems: "center" }}
         >
           <Typo size={30} fontWeight={"800"}>
-            Always take control
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
           </Typo>
           <Typo size={30} fontWeight={"800"}>
-            iof your finances
+            sit amet consectetur adipisicing elit.
           </Typo>
         </Animated.View>
 
@@ -58,10 +58,10 @@ const Welcome = () => {
           style={{ alignItems: "center", gap: 2 }}
         >
           <Typo size={17} color={colors.textLight}>
-            Blablallaalabl111ablaba1111111
+            Lorem ipsum dolor
           </Typo>
           <Typo size={17} color={colors.textLight}>
-            KHklhalkhaklhalkha
+            sit amet consectetur
           </Typo>
         </Animated.View>
 
