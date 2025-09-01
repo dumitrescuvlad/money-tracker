@@ -1,13 +1,20 @@
 import BackButton from "@/components/BackButton";
+import Button from "@/components/Button";
 import Input from "@/components/Input";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import Typo from "@/components/Typo";
 import { colors, spacingX, spacingY } from "@/constants/theme";
 import { verticalScale } from "@/utils/styling";
+import * as Icons from "phosphor-react-native";
 import React from "react";
-import { StyleSheet, View } from "react-native";
-
+import { Pressable, StyleSheet, View } from "react-native";
 const Login = () => {
+  const emailRef = React.useRef("");
+  const passwordRef = React.useRef("");
+
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const handleSubmit = async () => {};
   return (
     <ScreenWrapper>
       <View style={styles.container}>
@@ -26,7 +33,48 @@ const Login = () => {
           <Typo size={16} color={colors.textLighter}>
             Login now to track your expenses
           </Typo>
-          <Input containerStyle={{ width: "100%" }} />
+          <Input
+            containerStyle={{ width: "100%" }}
+            placeholder="Enter your email"
+            onChangeText={(value) => (emailRef.current = value)}
+            icon={
+              <Icons.At // deprecated, fix later @@@@@@@@@@@@@@@@
+                size={verticalScale(26)}
+                color={colors.neutral300}
+                weight="fill"
+              />
+            }
+          />
+          <Input
+            containerStyle={{ width: "100%" }}
+            placeholder="Enter your password"
+            secureTextEntry={true}
+            onChangeText={(value) => (passwordRef.current = value)}
+            icon={
+              <Icons.Lock // deprecated, fix later @@@@@@@@@@@@@@@@
+                size={verticalScale(26)}
+                color={colors.neutral300}
+                weight="fill"
+              />
+            }
+          />
+
+          <Typo size={14} color={colors.text} style={{ alignSelf: "flex-end" }}>
+            Forgot Password?
+          </Typo>
+
+          <Button loading={isLoading} onPress={handleSubmit}>
+            <Typo fontWeight={"700"} color={colors.black} size={21}>
+              Login
+            </Typo>
+          </Button>
+        </View>
+        {/**footer */}
+        <View style={styles.footer}>
+          <Typo size={15}>Don&#39;t have an account?</Typo>
+          <Pressable>
+            <Typo size={15}> Sign up</Typo>
+          </Pressable>
         </View>
       </View>
     </ScreenWrapper>
@@ -73,11 +121,7 @@ const styles = StyleSheet.create({
     paddingTop: verticalScale(30),
     paddingBottom: verticalScale(45),
     gap: spacingY._20,
-    shadowColor: "white",
-    shadowOffset: { width: 0, height: -10 },
     elevation: 10,
-    shadowRadius: 25,
-    shadowOpacity: 0.15,
   },
   buttonContainer: {
     width: "100%",
