@@ -5,16 +5,26 @@ import ScreenWrapper from "@/components/ScreenWrapper";
 import Typo from "@/components/Typo";
 import { colors, spacingX, spacingY } from "@/constants/theme";
 import { verticalScale } from "@/utils/styling";
+import { useRouter } from "expo-router";
 import * as Icons from "phosphor-react-native";
 import React from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Alert, Pressable, StyleSheet, View } from "react-native";
 const Login = () => {
   const emailRef = React.useRef("");
   const passwordRef = React.useRef("");
 
   const [isLoading, setIsLoading] = React.useState(false);
+  const router = useRouter();
 
-  const handleSubmit = async () => {};
+  const handleSubmit = async () => {
+    if (!emailRef.current || !passwordRef.current) {
+      Alert.alert("Login", "Please fill all the fields");
+      return;
+    }
+    console.log("email", emailRef.current);
+    console.log("password", passwordRef.current);
+    console.log("good to go");
+  };
   return (
     <ScreenWrapper>
       <View style={styles.container}>
@@ -72,8 +82,11 @@ const Login = () => {
         {/**footer */}
         <View style={styles.footer}>
           <Typo size={15}>Don&#39;t have an account?</Typo>
-          <Pressable>
-            <Typo size={15}> Sign up</Typo>
+          <Pressable onPress={() => router.push("/(auth)/register")}>
+            <Typo size={15} fontWeight={"700"} color={colors.primary}>
+              {" "}
+              Sign up
+            </Typo>
           </Pressable>
         </View>
       </View>
