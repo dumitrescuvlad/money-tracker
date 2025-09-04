@@ -27,6 +27,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           email: firebaseUser?.email,
           name: firebaseUser?.displayName,
         });
+        updateUserData(firebaseUser.uid);
         router.replace("/(tabs)"); // Redirect to main app if logged in
       } else {
         setUser(null);
@@ -44,6 +45,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       return { success: true };
     } catch (error: any) {
       let msg = error.message;
+      console.log("login error", msg);
+      if (msg.includes("(auth/invalid-credential)")) msg = "Wrong credentials";
+      if (msg.includes("(auth/invalid-email)")) msg = "Invalid email";
       return { success: false, msg };
     }
   };
@@ -63,6 +67,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       return { success: true };
     } catch (error: any) {
       let msg = error.message;
+      console.log("error message", msg);
+      if (msg.includes("(auth/email-already-in-use)"))
+        msg = "This email is already in use";
+      if (msg.includes("(auth/invalid-email)")) msg = "Invalid email";
       return { success: false, msg };
     }
   };
