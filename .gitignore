@@ -38,3 +38,5 @@ yarn-error.*
 # images
 assets/images/
 app-example
+
+config/firebase.ts
