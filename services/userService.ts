@@ -7,11 +7,12 @@ export const updateUser = async (
   updatedData: UserDataType
 ): Promise<ResponseType> => {
   try {
+    // img upload
     const useRef = doc(firestore, "users", uid);
     await updateDoc(useRef, updatedData);
 
     // fetch user and update the user
-    return { success: true };
+    return { success: true, msg: "updated successfully" };
   } catch (error: any) {
     console.log("error updating user: ", error);
     return { success: false, msg: error?.message };

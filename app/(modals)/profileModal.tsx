@@ -7,9 +7,12 @@ import Typo from "@/components/Typo";
 import { colors, spacingX, spacingY } from "@/constants/theme";
 import { useAuth } from "@/contexts/authContexts";
 import { getProfileImage } from "@/services/ImageServices";
+import { updateUser } from "@/services/userService";
 import { UserDataType } from "@/types";
 import { scale, verticalScale } from "@/utils/styling";
 import { Image } from "expo-image";
+import * as ImagePicker from "expo-image-picker";
+import { useRouter } from "expo-router";
 import * as Icons from "phosphor-react-native";
 import React, { useEffect, useState } from "react";
 import {
@@ -19,14 +22,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
 const ProfileModal = () => {
-  const { user } = useAuth();
+  const { user, updateUserData } = useAuth();
   const [userData, setUserData] = useState<UserDataType>({
     name: "",
     image: null,
   });
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setUserData({
@@ -35,6 +38,19 @@ const ProfileModal = () => {
     });
   }, [user]);
 
+  const onPickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      //allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.5,
+    });
+
+    if (!result.canceled) {
+      setUserData({ ...userData, image: result.assets[0] });
+    }
+  };
+
   const onSubmit = async () => {
     let { name, image } = userData;
     if (!name.trim()) {
@@ -42,7 +58,16 @@ const ProfileModal = () => {
       return;
     }
 
-    console.log("Good to go");
+    setLoading(true);
+    const res = await updateUser(user?.uid as string, userData);
+    setLoading(false);
+    if (res.success) {
+      // update user
+      updateUserData(user?.uid as string);
+      router.back();
+    } else {
+      Alert.alert("User", res.msg);
+    }
   };
   return (
     <ModalWrapper>
@@ -61,7 +86,7 @@ const ProfileModal = () => {
               contentFit="cover"
               transition={100}
             />
-            <TouchableOpacity style={styles.editIcon}>
+            <TouchableOpacity onPress={onPickImage} style={styles.editIcon}>
               <Icons.PencilSimple size={20} color={colors.neutral800} />
             </TouchableOpacity>
           </View>
