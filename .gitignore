@@ -40,3 +40,4 @@ assets/images/
 app-example
 
 config/firebase.ts
+constants/index.ts
