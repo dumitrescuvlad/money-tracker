@@ -31,7 +31,7 @@ export const uploadFileToCloudinary = async (
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log("upload image result: ", response?.data);
+      console.log("upload image result: ", response?.data); //check the response for image upload
 
       return { success: true, data: response?.data?.secure_url };
     }
