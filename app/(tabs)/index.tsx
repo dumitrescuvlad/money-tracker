@@ -25,25 +25,27 @@ const Home = () => {
             <Typo size={20} fontWeight={"500"}>
               {user?.name}
             </Typo>
-            <TouchableOpacity style={styles.searchIcon}>
-              <Icons.MagnifyingGlass
-                size={verticalScale(22)}
-                color={colors.neutral200}
-                weight="bold"
-              />
-            </TouchableOpacity>
           </View>
-          <ScrollView
-            contentContainerStyle={styles.scrollViewStyle}
-            showsVerticalScrollIndicator={false}
-          >
-            {/* Cards */}
-            <View>
-              <HomeCard />
-            </View>
-          </ScrollView>
+
+          <TouchableOpacity style={styles.searchIcon}>
+            <Icons.MagnifyingGlass
+              size={verticalScale(22)}
+              color={colors.neutral200}
+              weight="bold"
+            />
+          </TouchableOpacity>
         </View>
       </View>
+
+      {/* Content below header */}
+      <ScrollView
+        contentContainerStyle={styles.scrollViewStyle}
+        showsVerticalScrollIndicator={false}
+      >
+        <View>
+          <HomeCard />
+        </View>
+      </ScrollView>
     </ScreenWrapper>
   );
 };
@@ -55,12 +57,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacingX._20,
     marginTop: verticalScale(8),
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: spacingY._10,
-  },
+ header: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: spacingY._10,
+},
   searchIcon: {
     backgroundColor: colors.neutral700,
     padding: spacingX._10,

@@ -1,13 +1,78 @@
 import { colors, spacingX, spacingY } from "@/constants/theme";
-import { scale } from "@/utils/styling";
+import { scale, verticalScale } from "@/utils/styling";
+import * as Icons from "phosphor-react-native";
 import React from "react";
-import { ImageBackground, StyleSheet } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import Typo from "./Typo";
-
 const HomeCard = () => {
   return (
-    <ImageBackground source={require("../assets/images/card.png")}>
-      <Typo>HomeCard</Typo>
+    <ImageBackground
+      source={require("../assets/images/card.png")}
+      resizeMode="stretch"
+      style={styles.bgImage}
+    >
+      <View style={styles.container}>
+        <View>
+          {/* Total Balance */}
+          <View style={styles.totalBalanceRow}>
+            <Typo color={colors.neutral800} size={17} fontWeight={"500"}>
+              Total balance
+            </Typo>
+            <Icons.DotsThreeOutlineIcon
+              size={verticalScale(23)}
+              color={colors.black}
+              weight="fill"
+            />
+          </View>
+          <Typo color={colors.black} size={30} fontWeight={"bold"}>
+            $1235.00
+          </Typo>
+        </View>
+
+        {/* Stats: Income & Expense */}
+        <View style={styles.stats}>
+          {/* Income */}
+          <View style={{ gap: verticalScale(5) }}>
+            <View style={styles.incomeExpense}>
+              <View style={styles.statsIcon}>
+                <Icons.ArrowDown
+                  size={verticalScale(15)}
+                  color={colors.black}
+                  weight="bold"
+                />
+              </View>
+              <Typo size={16} color={colors.neutral700} fontWeight={"500"}>
+                Income
+              </Typo>
+            </View>
+            <View style={{ alignSelf: "center" }}>
+              <Typo size={17} color={colors.green} fontWeight={"600"}>
+                $1234.00
+              </Typo>
+            </View>
+          </View>
+          {/* Expense */}
+          <View style={{ gap: verticalScale(5) }}>
+            <View style={styles.incomeExpense}>
+              <View style={styles.statsIcon}>
+                <Icons.ArrowUp
+                  size={verticalScale(15)}
+                  color={colors.black}
+                  weight="bold"
+                />
+              </View>
+              <Typo size={16} color={colors.neutral700} fontWeight={"500"}>
+                Expense
+              </Typo>
+            </View>
+            <View style={{ alignSelf: "center" }}>
+              <Typo size={17} color={colors.rose} fontWeight={"600"}>
+                $3000.00
+              </Typo>
+            </View>
+          </View>
+        </View>
+      </View>
     </ImageBackground>
   );
 };
