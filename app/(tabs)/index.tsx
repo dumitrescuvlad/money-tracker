@@ -1,5 +1,6 @@
 import HomeCard from "@/components/HomeCard";
 import ScreenWrapper from "@/components/ScreenWrapper";
+import TransactionList from "@/components/TransactionList";
 import Typo from "@/components/Typo";
 import { colors, spacingX, spacingY } from "@/constants/theme";
 import { useAuth } from "@/contexts/authContexts";
@@ -45,6 +46,8 @@ const Home = () => {
         <View>
           <HomeCard />
         </View>
+
+        <TransactionList />
       </ScrollView>
     </ScreenWrapper>
   );
@@ -57,12 +60,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacingX._20,
     marginTop: verticalScale(8),
   },
- header: {
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: spacingY._10,
-},
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: spacingY._10,
+  },
   searchIcon: {
     backgroundColor: colors.neutral700,
     padding: spacingX._10,
