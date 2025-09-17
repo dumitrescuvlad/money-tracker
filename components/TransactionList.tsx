@@ -4,7 +4,8 @@ import { TransactionItemProps, TransactionListType } from "@/types";
 import { verticalScale } from "@/utils/styling";
 import { FlashList } from "@shopify/flash-list";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import Animated, { FadeInDown } from "react-native-reanimated";
 import Loading from "./Loading";
 import Typo from "./Typo";
 const TransactionList = ({
@@ -63,12 +64,47 @@ const TransactionItem = ({
   handleClick,
 }: TransactionItemProps) => {
   let category = expenseCategories["groceries"];
-  console.log("category", category);
+  const IconComponent = category.icon;
 
   return (
-    <View>
-      <Typo>Transaction Item</Typo>
-    </View>
+    <Animated.View
+      entering={FadeInDown.delay(index * 70)
+        .springify()
+        .damping(14)}
+    >
+      <TouchableOpacity style={styles.row} onPress={() => handleClick(item)}>
+        <View style={[styles.icon, { backgroundColor: category.bgColor }]}>
+          {IconComponent && (
+            <IconComponent
+              size={verticalScale(25)}
+              weight="fill"
+              color={colors.white}
+            />
+          )}
+        </View>
+
+        <View style={styles.categoryDes}>
+          <Typo size={17}>{category.label}</Typo>
+          <Typo
+            size={12}
+            color={colors.neutral400}
+            textProps={{ numberOfLines: 1 }}
+          >
+            {/* {item?.description} */}
+            streaming sub
+          </Typo>
+        </View>
+
+        <View style={styles.amountDate}>
+          <Typo fontWeight={"500"} color={colors.rose}>
+            - $45.00
+          </Typo>
+          <Typo size={13} color={colors.neutral400}>
+            12 Aug, 2026
+          </Typo>
+        </View>
+      </TouchableOpacity>
+    </Animated.View>
   );
 };
 
@@ -89,9 +125,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: spacingX._12,
     marginBottom: spacingY._12,
-  },
-  // list with background
-  listWithBackground: {
+
+    // list with background
     backgroundColor: colors.neutral800,
     padding: spacingY._10,
     paddingHorizontal: spacingY._10,

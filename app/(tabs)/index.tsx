@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import HomeCard from "@/components/HomeCard";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import TransactionList from "@/components/TransactionList";
@@ -5,15 +6,14 @@ import Typo from "@/components/Typo";
 import { colors, spacingX, spacingY } from "@/constants/theme";
 import { useAuth } from "@/contexts/authContexts";
 import { verticalScale } from "@/utils/styling";
+import { useRouter } from "expo-router";
 import * as Icons from "phosphor-react-native";
 import React from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 const Home = () => {
   const { user } = useAuth();
-  //console.log("user: ", user);
-  // const handleLogout = async () => {
-  // await signOut(auth);
-  //};
+  const router = useRouter();
+
   return (
     <ScreenWrapper>
       <View style={styles.container}>
@@ -36,24 +36,35 @@ const Home = () => {
             />
           </TouchableOpacity>
         </View>
+
+        {/* Content below header */}
+        <ScrollView
+          contentContainerStyle={styles.scrollViewStyle}
+          showsVerticalScrollIndicator={false}
+        >
+          <View>
+            <HomeCard />
+          </View>
+
+          <TransactionList
+            data={[1, 2, 3, 4, 5, 6]} // Example data
+            loading={false}
+            emptyListMessage="No transactions added yet."
+            title="Recent Transactions"
+          />
+        </ScrollView>
+
+        <Button
+          style={styles.floatingButton}
+          onPress={() => router.push("/(modals)/transactionModal")}
+        >
+          <Icons.Plus
+            color={colors.black}
+            weight="bold"
+            size={verticalScale(24)}
+          />
+        </Button>
       </View>
-
-      {/* Content below header */}
-      <ScrollView
-        contentContainerStyle={styles.scrollViewStyle}
-        showsVerticalScrollIndicator={false}
-      >
-        <View>
-          <HomeCard />
-        </View>
-
-        <TransactionList
-          data={[]}
-          loading={false}
-          emptyListMessage="No transactions added yet."
-          title="Recent Transactions"
-        />
-      </ScrollView>
     </ScreenWrapper>
   );
 };
