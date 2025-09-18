@@ -83,11 +83,10 @@ const TransactionModal = () => {
   const onSubmit = async () => {
     const { type, amount, description, category, date, walletId, image } =
       transaction;
-    if ((!(type === "expense") && !category) || !amount || !walletId || !date) {
+    if (!amount || !walletId || !date || (type === "expense" && !category)) {
       Alert.alert("Transaction", "Please fill all the fields");
       return;
     }
-    console.log("good to go");
     let transactionData: TransactionType = {
       type,
       amount,
@@ -98,7 +97,6 @@ const TransactionModal = () => {
       image,
       uid: user?.uid,
     };
-    console.log("transactionData: ", transactionData);
 
     // include transaction idfor update
     setLoading(true);
