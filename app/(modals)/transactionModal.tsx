@@ -9,16 +9,18 @@ import { expenseCategories, transactionTypes } from "@/constants/data";
 import { colors, radius, spacingX, spacingY } from "@/constants/theme";
 import { useAuth } from "@/contexts/authContexts";
 import useFetchData from "@/hooks/useFetchData";
-import { createOrUpdateTransaction } from "@/services/transactionService";
+import {
+  createOrUpdateTransaction,
+  deleteTransaction,
+} from "@/services/transactionService";
 
-import { deleteWallet } from "@/services/walletServices";
 import { TransactionType, WalletType } from "@/types";
 import { scale, verticalScale } from "@/utils/styling";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { orderBy, where } from "firebase/firestore";
 import * as Icons from "phosphor-react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Platform,
@@ -41,6 +43,7 @@ const TransactionModal = () => {
     walletId: "",
     image: null,
   });
+
   const [loading, setLoading] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const router = useRouter();
@@ -54,8 +57,19 @@ const TransactionModal = () => {
     orderBy("created", "desc"),
   ]);
 
-  const oldTransaction: { name: string; image: string; id: string } =
-    useLocalSearchParams();
+  type paramType = {
+    id: string;
+    type: string;
+    amount: string;
+    category?: string;
+    date: string;
+    description?: string;
+    image?: any;
+    uid?: string;
+    walletId: string;
+  };
+
+  const oldTransaction: paramType = useLocalSearchParams();
 
   const onDateChange = (event: any, selected?: Date) => {
     if (Platform.OS === "android") {
@@ -70,16 +84,21 @@ const TransactionModal = () => {
       if (selected) setTransaction((prev) => ({ ...prev, date: selected }));
     }
   };
-  /*
+
   useEffect(() => {
     if (oldTransaction?.id) {
       setTransaction({
-        name: oldTransaction?.name,
+        type: oldTransaction?.type,
+        amount: Number(oldTransaction?.amount),
+        description: oldTransaction?.description || "",
+        category: oldTransaction?.category || "",
+        date: new Date(oldTransaction?.date),
+        walletId: oldTransaction?.walletId,
         image: oldTransaction?.image,
       });
     }
   }, []);
-*/
+
   const onSubmit = async () => {
     const { type, amount, description, category, date, walletId, image } =
       transaction;
@@ -94,11 +113,13 @@ const TransactionModal = () => {
       category,
       date,
       walletId,
-      image,
+      image: image ? image : null,
       uid: user?.uid,
     };
 
-    // include transaction idfor update
+    if (oldTransaction?.id) {
+      transactionData.id = oldTransaction.id;
+    }
     setLoading(true);
     const res = await createOrUpdateTransaction(transactionData);
 
@@ -113,19 +134,22 @@ const TransactionModal = () => {
   const onDelete = async () => {
     if (!oldTransaction?.id) return;
     setLoading(true);
-    const res = await deleteWallet(oldTransaction?.id);
+    const res = await deleteTransaction(
+      oldTransaction?.id,
+      oldTransaction?.walletId!
+    );
     setLoading(false);
     if (res.success) {
       router.back();
     } else {
-      Alert.alert("Wallet", res.msg);
+      Alert.alert("Transaction", res.msg);
     }
   };
 
   const showDeleteAlert = () => {
     Alert.alert(
       "Confirm",
-      "Are you sure you want to delete this wallet?\nThis action will be irreversible.",
+      "Are you sure you want to delete this transaction?",
       [
         {
           text: "Cancel",
