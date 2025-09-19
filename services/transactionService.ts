@@ -243,8 +243,8 @@ export const deleteTransaction = async (
 
     const newIncomeExpenseAmount = walletData[updateType]! - transactionAmount;
 
-    // if its expense and the wallet amount go below zero
-    if (transactionType === "expense" && newWalletAmount < 0) {
+    // if its income and the wallet amount go below zero
+    if (transactionType === "income" && newWalletAmount < 0) {
       return { success: false, msg: "Can't delete this transaction" };
     }
 
