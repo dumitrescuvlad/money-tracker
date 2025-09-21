@@ -1,4 +1,5 @@
 # 💰 Money Tracker
+<img src="./app/screenshots/Home.jpg" alt="App preview" width="400"/>
 
 A simple **Expo + React Native** app to track your **income and expenses**.  
 View **weekly, monthly, and yearly statistics** with interactive charts, filter by categories, and manage your wallets — all in one clean mobile interface.
