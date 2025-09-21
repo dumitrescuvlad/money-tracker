@@ -42,11 +42,11 @@ const Welcome = () => {
           entering={FadeInDown.duration(1000).springify().damping(12)}
           style={{ alignItems: "center" }}
         >
-          <Typo size={30} fontWeight={"800"}>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          <Typo size={30} fontWeight={"800"} style={{ textAlign: "center" }}>
+            Welcome to Money Tracker!
           </Typo>
-          <Typo size={30} fontWeight={"800"}>
-            sit amet consectetur adipisicing elit.
+          <Typo size={30} fontWeight={"800"} style={{ textAlign: "center" }}>
+            Check your stats and manage your budget all in one place.
           </Typo>
         </Animated.View>
 
@@ -58,10 +58,10 @@ const Welcome = () => {
           style={{ alignItems: "center", gap: 2 }}
         >
           <Typo size={17} color={colors.textLight}>
-            Lorem ipsum dolor
+            If you don&apos;t have an account,
           </Typo>
           <Typo size={17} color={colors.textLight}>
-            sit amet consectetur
+            please sign up.
           </Typo>
         </Animated.View>
 

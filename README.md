@@ -1,52 +1,150 @@
-# PROJECT IN PROGRESS && DESCRIPTION IN PROGRESS
+# 💰 Money Tracker
 
-# Welcome to your Expo app 👋
+A simple **Expo + React Native** app to track your **income and expenses**.  
+View **weekly, monthly, and yearly statistics** with interactive charts, filter by categories, and manage your wallets — all in one clean mobile interface.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+---
 
-## Get started
+## ✨ Features
 
-1. Install dependencies
+- Add, edit, and delete **transactions** (income/expense)
+- Support for **categories** and **wallets**
+- View **statistics** (weekly / monthly / yearly) with interactive charts
+- Clean **transaction list** powered by FlashList for speed
+- Authentication context ready to integrate with Firebase Auth
+- Responsive UI with reusable components and theme constants (colors, spacing, radius)
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 📸 Screens (examples)
 
-   ```bash
-   npx expo start
-   ```
+- Home with cards and recent transactions
 
-In the output, you'll find options to open the app in a
+- Statistics tab with segmented control + charts
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Add/Update Transaction modal (amount, category, notes, date)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Settings
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 🧱 Tech Stack
+
+- **Expo (Router)** + **React Native**
+- **TypeScript**
+- **Firebase Firestore** (data storage, queries with `where`, `orderBy`, `limit`)
+- **UI/UX Libraries:**
+  - [FlashList](https://shopify.github.io/flash-list/) – high-performance lists
+  - [Gifted Charts](https://www.npmjs.com/package/react-native-gifted-charts) – bar charts
+  - [Segmented Control](https://docs.expo.dev/versions/latest/sdk/segmented-control/) – switch stats view
+  - [Phosphor React Native](https://phosphoricons.com/) – icon set
+  - [DateTimePicker](https://docs.expo.dev/versions/latest/sdk/date-time-picker/) – date input
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
 
 ```bash
-npm run reset-project
+git clone https://github.com/dumitrescuvlad/money-tracker.git
+cd money-tracker
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Install dependencies
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 3. Configure Firebase
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Create a Firebase project and enable Firestore.  
+Add your config to a local file (e.g. `src/firebase.ts`):
 
-## Join the community
+```ts
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
-Join our community of developers creating universal apps.
+const firebaseConfig = {
+  apiKey: "…",
+  authDomain: "…",
+  projectId: "…",
+  storageBucket: "…",
+  messagingSenderId: "…",
+  appId: "…",
+};
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+export const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+```
+
+Make sure your `services/` (e.g., `walletServices`, `transactionService`) use this config.
+
+### 4. Run the app
+
+```bash
+npx expo start
+```
+
+Then press:
+
+- `a` → Android
+- `i` → iOS
+- `w` → Web
+
+---
+
+## 📂 Project Structure
+
+```
+app/                # Expo Router screens
+components/         # Reusable UI components (Header, Button, etc.)
+constants/          # Theme (colors, spacing, radius) + static data (categories, transactionTypes)
+contexts/           # Global contexts (authContexts)
+hooks/              # Custom hooks (e.g., useFetchData)
+services/           # Firestore services (walletServices, transactionService)
+utils/              # Helpers (styling: scale, verticalScale)
+types.ts            # Shared TypeScript types
+assets/             # Fonts, images, icons
+```
+
+---
+
+## 📦 Imports / Dependencies
+
+Here’s a full inventory of what the app currently uses:
+
+### Core
+
+- `react`
+- `react-native`
+
+### Expo & Routing
+
+- `expo`
+- `expo-router`
+
+### Firebase
+
+- `firebase/firestore` (`where`, `orderBy`, `limit`)
+
+### UI / UX
+
+- `@shopify/flash-list` – fast lists
+- `react-native-gifted-charts` – charts
+- `@react-native-segmented-control/segmented-control` – segmented tabs
+- `phosphor-react-native` – icons
+- `@react-native-community/datetimepicker` – date picker
+
+### Internal (alias `@/`)
+
+- `@/components/*` – Header, Button, HomeCard, TransactionList, Typo, ModalWrapper, Loading
+- `@/constants/*` – colors, radius, spacingX, spacingY, expenseCategories, transactionTypes
+- `@/contexts/authContexts` – authentication context
+- `@/hooks/useFetchData` – Firestore query hook
+- `@/services/*` – walletServices, transactionService
+- `@/utils/styling` – scale, verticalScale
+- `@/types` – shared TypeScript types
+
+---
