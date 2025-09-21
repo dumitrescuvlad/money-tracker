@@ -381,7 +381,12 @@ const TransactionModal = () => {
             onPress={showDeleteAlert}
             style={{
               backgroundColor: colors.rose,
-              paddingHorizontal: spacingX._15,
+              width: verticalScale(50),
+              height: verticalScale(50),
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: radius._12,
+              paddingHorizontal: 0,
             }}
           >
             <Icons.Trash
