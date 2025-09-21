@@ -19,12 +19,16 @@ View **weekly, monthly, and yearly statistics** with interactive charts, filter 
 ## 📸 Screens (examples)
 
 - Home with cards and recent transactions
+![IMG-20250921-WA0012](https://github.com/user-attachments/assets/5a9cf4c2-6f2e-48b9-a8a8-3bd8d35efd24)
 
 - Statistics tab with segmented control + charts
+![IMG-20250921-WA0010](https://github.com/user-attachments/assets/be974d2c-df1f-41ba-b8aa-bf21afeb2b80)
 
 - Add/Update Transaction modal (amount, category, notes, date)
+![IMG-20250921-WA0011](https://github.com/user-attachments/assets/421baf02-588a-43ae-a70d-a5a472d78e13)
 
 - Settings
+![IMG-20250921-WA0013](https://github.com/user-attachments/assets/5a7b982f-9210-4e64-b7d4-4459f7e81608)
 
 ---
 
