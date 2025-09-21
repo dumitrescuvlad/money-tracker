@@ -16,6 +16,19 @@ View **weekly, monthly, and yearly statistics** with interactive charts, filter 
 
 ---
 
+## 📸 Screens (examples)
+
+- Home with cards and recent transactions
+  ![Home screen] (./screenshots)/Home.jpg
+- Statistics tab with segmented control + charts
+  ![Statistics screen] (./screenshots)/Stats.jpg
+- Add/Update Transaction modal (amount, category, notes, date)
+  ![Add/Update screen] (./screenshots)/Update.jpg
+- Settings
+  ![Settings screen] (./screenshots)/settings.jpg
+
+---
+
 ## 🧱 Tech Stack
 
 - **Expo (Router)** + **React Native**
