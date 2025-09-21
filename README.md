@@ -18,14 +18,15 @@ View **weekly, monthly, and yearly statistics** with interactive charts, filter 
 
 ## 📸 Screens (examples)
 
-- Home with cards and recent transactions
-  ![Home screen](./app/screenshots/Home.jpg)/Home.jpg
-- Statistics tab with segmented control + charts
-  ![Statistics screen](./app/screenshots/Stats.jpg)/Stats.jpg
-- Add/Update Transaction modal (amount, category, notes, date)
-  ![Add/Update screen](./app/screenshots/Update.jpg)/Update.jpg
-- Settings
-  ![Settings screen](./app/screenshots/settings.jpg)/settings.jpg
+<p align="center">
+  <img src="./app/screenshots/Home.jpg" alt="Home screen" width="250"/>
+  <img src="./app/screenshots/Stats.jpg" alt="Statistics screen" width="250"/>
+</p>
+
+<p align="center">
+  <img src="./app/screenshots/Update.jpg" alt="Add/Update Transaction screen" width="250"/>
+  <img src="./app/screenshots/settings.jpg" alt="Settings screen" width="250"/>
+</p>
 
 ---
 
