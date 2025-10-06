@@ -41,7 +41,7 @@ View **weekly, monthly, and yearly statistics** with interactive charts, filter 
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the repo
 
