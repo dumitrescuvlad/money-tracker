@@ -1,11 +1,11 @@
-# 💰 Money Tracker
+# Money Tracker
 
 A simple **Expo + React Native** app to track your **income and expenses**.  
 View **weekly, monthly, and yearly statistics** with interactive charts, filter by categories, and manage your wallets — all in one clean mobile interface.
 
 ---
 
-## ✨ Features
+## Features
 
 - Add, edit, and delete **transactions** (income/expense)
 - Support for **categories** and **wallets**
@@ -16,7 +16,7 @@ View **weekly, monthly, and yearly statistics** with interactive charts, filter 
 
 ---
 
-## 📸 Screens (examples)
+## Screens (examples)
 
 <p align="center">
   <img src="./app/screenshots/Home.jpg" alt="Home" width="200"/>
@@ -27,7 +27,7 @@ View **weekly, monthly, and yearly statistics** with interactive charts, filter 
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 - **Expo (Router)** + **React Native**
 - **TypeScript**
@@ -94,7 +94,7 @@ Then press:
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 app/                # Expo Router screens
@@ -110,7 +110,7 @@ assets/             # Fonts, images, icons
 
 ---
 
-## 📦 Imports / Dependencies
+## Imports / Dependencies
 
 Here’s a full inventory of what the app currently uses:
 
